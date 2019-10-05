@@ -151,7 +151,7 @@ const Survey: React.FC = () => {
   };
 
   return (
-    <div className="container survey bounce-in-top">
+    <div className="container survey swing-in-top-fwd">
       <h2>About You</h2>
       <TextInput
         placeholder="Name (Required)"
