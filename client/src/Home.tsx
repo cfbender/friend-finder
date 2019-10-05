@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import { Button } from "react-materialize";
+import "./Home.css";
 
 const Home: React.FC = () => {
   return (
@@ -10,12 +11,13 @@ const Home: React.FC = () => {
         <Button>Start Survey</Button>
       </Link>
 
-      <footer>
-        <Link to="api">
-          <p className="api-link">View API Data</p>
-        </Link>
+      <footer className="footer">
+        <a href="/api" className="api-link">
+          View API Data
+        </a>
 
         <iframe
+          className="github-link"
           src="https://ghbtns.com/github-btn.html?user=cfbender&repo=friend-finder&type=star&count=true"
           frameBorder="0"
           scrolling="0"

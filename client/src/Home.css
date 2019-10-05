@@ -1,0 +1,8 @@
+.footer {
+  margin-top: 50px;
+  display: flex;
+}
+
+.api-link {
+  margin-right: 50px;
+}
