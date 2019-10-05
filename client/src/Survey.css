@@ -13,3 +13,23 @@
 .input-field > label {
   font-size: 16px;
 }
+
+.modal-content {
+  display: grid;
+  justify-items: center;
+  margin: 0 auto;
+}
+
+.modal-container {
+  display: grid;
+  justify-items: center;
+}
+
+.modal-photo {
+  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  margin: 10px;
+}
+
+.modal {
+  max-height: 100%;
+}

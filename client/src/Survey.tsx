@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { TextInput, Modal } from "react-materialize";
+import { TextInput, Modal, Button } from "react-materialize";
 import Question from "./Question";
 import "./Survey.css";
+import { navigate } from "@reach/router";
 
 const Survey: React.FC = () => {
   const [answers, updateAnswers]: [
@@ -43,11 +44,15 @@ const Survey: React.FC = () => {
   ];
   interface FriendMatch {
     show: boolean;
-    data?: { name: string; photo: string };
+    data: { name: string; photo: string };
   }
 
   const [match, updateMatch]: [FriendMatch, Function] = useState({
-    show: false
+    show: true,
+    data: {
+      photo: "http://placecorgi.com/250",
+      name: "Rufus"
+    }
   });
 
   const [errors, updateErrors]: [{ [k: string]: string }, Function] = useState(
@@ -80,7 +85,11 @@ const Survey: React.FC = () => {
     e.preventDefault();
     if (formValidate()) {
       const url = "/api";
-      const data = { answers: getAnswers() };
+      const data = {
+        photo: picture.text,
+        name: name.text,
+        answers: getAnswers()
+      };
       console.log(data);
       try {
         const response = await fetch(url, {
@@ -122,17 +131,32 @@ const Survey: React.FC = () => {
   return (
     <div className="container survey">
       <h2>About You</h2>
-      <Modal header="Modal Header" open={match.show}>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
-        </p>
+      <Modal
+        header="Your friend match is here!"
+        open={match.show}
+        actions={
+          <Button
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Close
+          </Button>
+        }
+      >
+        <div className="modal-container">
+          <img
+            src={match.data.photo}
+            alt="friend photo"
+            className="modal-photo"
+          />
+          <h2 className="modal-name">{match.data.name}</h2>
+          <p className="modal-text">
+            We hope you have a long, successful friendship!
+          </p>
+        </div>
       </Modal>
+
       <TextInput
         placeholder="Name (Required)"
         onChange={(e: { target: { value: string } }) =>
