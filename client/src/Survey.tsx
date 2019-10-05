@@ -5,6 +5,7 @@ import "./Survey.css";
 import { navigate } from "@reach/router";
 
 const Survey: React.FC = () => {
+  //hook to store answers
   const [answers, updateAnswers]: [
     { [k: string]: number },
     Function
@@ -21,6 +22,7 @@ const Survey: React.FC = () => {
     ten: 0
   });
 
+  //hooks to store name and picture from text boxes
   const [name, updateName]: [
     { text?: string; error?: string },
     Function
@@ -30,6 +32,7 @@ const Survey: React.FC = () => {
     Function
   ] = useState({});
 
+  //array storing questions
   const questions: string[] = [
     "You prefer to stay at home rather than go out and party.",
     "You prefer cats over dogs",
@@ -42,11 +45,13 @@ const Survey: React.FC = () => {
     "You think double-dipping is A-okay",
     "Your name is Ben Shapiro"
   ];
+
   interface FriendMatch {
     show: boolean;
     data: { name: string; photo: string };
   }
 
+  // hook to store the match back from the response
   const [match, updateMatch]: [FriendMatch, Function] = useState({
     show: false,
     data: {
@@ -54,11 +59,16 @@ const Survey: React.FC = () => {
       name: "Rufus"
     }
   });
-
+  //hook to store any error text for the survey
   const [errors, updateErrors]: [{ [k: string]: string }, Function] = useState(
     {}
   );
 
+  /**
+   * @description Checks if text is in the text boxes, and if all questions have been answered, and updates state accordingly
+   *
+   * @returns {boolean} if form is valid
+   */
   const formValidate = (): boolean => {
     updateErrors({});
     let formIsValid = true;
@@ -81,6 +91,11 @@ const Survey: React.FC = () => {
     return formIsValid;
   };
 
+  /**
+   * @description Validates form, collects data, sends POST to API and receives response
+   *
+   * @param {*} e event for form submit
+   */
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (formValidate()) {
@@ -108,6 +123,11 @@ const Survey: React.FC = () => {
     }
   };
 
+  /**
+   * @description Stores all new answers and errors
+   *
+   * @param {{ target: { id: number; value: number } }} e a state change event for the form
+   */
   const handleChange = (e: { target: { id: number; value: number } }) => {
     formValidate();
     const temp = answers;
@@ -119,6 +139,11 @@ const Survey: React.FC = () => {
     updateErrors(tempErrors);
   };
 
+  /**
+   * @description Takes all numbers from answers and gathers into array
+   *
+   * @returns {number[]} An array of all user-selected numbers
+   */
   const getAnswers = () => {
     const arr: number[] = [];
     Object.keys(answers).forEach(prop => arr.push(answers[prop]));
@@ -128,6 +153,56 @@ const Survey: React.FC = () => {
   return (
     <div className="container survey bounce-in-top">
       <h2>About You</h2>
+      <TextInput
+        placeholder="Name (Required)"
+        onChange={(e: { target: { value: string } }) =>
+          updateName({ text: e.target.value })
+        }
+      />
+      <p className="text-error">{name.error}</p>
+      <TextInput
+        placeholder="Link to Picture of You (Required)"
+        onChange={(e: { target: { value: string } }) =>
+          updatePicture({ text: e.target.value })
+        }
+      />
+      <p className="text-error">{picture.error}</p>
+      <h2>Survey:</h2>
+      <p>
+        Rate how much you agree with the following statements, from a 1
+        (strongly disagree) to a 5 (strongly agree)
+      </p>
+      <div className="row">
+        <form onSubmit={handleSubmit}>
+          <label>
+            {questions.map((question, idx) => {
+              let prop = Object.keys(answers)[idx];
+              {
+                /* Renders out all questions as a Question component*/
+              }
+              return (
+                <div className="question row" key={`div${idx + 1}`}>
+                  <Question
+                    key={idx + 1}
+                    name={prop}
+                    text={questions[idx]}
+                    callback={handleChange}
+                    errors={errors[prop]}
+                    selected={answers[prop]}
+                  />
+                </div>
+              );
+            })}
+          </label>
+          <input
+            id="survey-submit"
+            type="submit"
+            className="btn right"
+            value="Submit Answers"
+          />
+        </form>
+      </div>
+      {/* Modal only active after response is successful, close button navigates to root*/}
       <Modal
         header="Your friend match is here!"
         open={match.show}
@@ -153,53 +228,6 @@ const Survey: React.FC = () => {
           </p>
         </div>
       </Modal>
-
-      <TextInput
-        placeholder="Name (Required)"
-        onChange={(e: { target: { value: string } }) =>
-          updateName({ text: e.target.value })
-        }
-      />
-      <p className="text-error">{name.error}</p>
-      <TextInput
-        placeholder="Link to Picture of You (Required)"
-        onChange={(e: { target: { value: string } }) =>
-          updatePicture({ text: e.target.value })
-        }
-      />
-      <p className="text-error">{picture.error}</p>
-      <h2>Survey:</h2>
-      <p>
-        Rate how much you agree with the following statements, from a 1
-        (strongly disagree) to a 5 (strongly agree)
-      </p>
-      <div className="row">
-        <form onSubmit={handleSubmit}>
-          <label>
-            {questions.map((question, idx) => {
-              let prop = Object.keys(answers)[idx];
-              return (
-                <div className="question row" key={`div${idx + 1}`}>
-                  <Question
-                    key={idx + 1}
-                    name={prop}
-                    text={questions[idx]}
-                    callback={handleChange}
-                    errors={errors[prop]}
-                    selected={answers[prop]}
-                  />
-                </div>
-              );
-            })}
-          </label>
-          <input
-            id="survey-submit"
-            type="submit"
-            className="btn right"
-            value="Submit Answers"
-          />
-        </form>
-      </div>
     </div>
   );
 };

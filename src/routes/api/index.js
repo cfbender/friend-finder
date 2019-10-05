@@ -11,8 +11,10 @@ router.get("/", (req, res) => {
 router.post("/", async (req, res) => {
   let match = await bestMatch(req.body, data);
   match.show = true;
+  // add friend to local data
   data.friends.push(req.body);
   try {
+    //write it out
     await fs.writeJson(
       path.join(__dirname, "../..", "/data/friends.json"),
       data
