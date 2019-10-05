@@ -48,7 +48,7 @@ const Survey: React.FC = () => {
   }
 
   const [match, updateMatch]: [FriendMatch, Function] = useState({
-    show: true,
+    show: false,
     data: {
       photo: "http://placecorgi.com/250",
       name: "Rufus"
@@ -129,7 +129,7 @@ const Survey: React.FC = () => {
   };
 
   return (
-    <div className="container survey">
+    <div className="container survey bounce-in-top">
       <h2>About You</h2>
       <Modal
         header="Your friend match is here!"
