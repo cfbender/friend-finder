@@ -2,7 +2,12 @@
   "dependencies": {
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
-    "fs-extra": "^8.1.0"
+    "fs-extra": "^8.1.0",
+    "lodash.sortby": "^4.7.0"
+  },
+  "scripts": {
+    "start": "node ./src/server.js",
+    "heroku-postbuild": "cd client && yarn && yarn build"
   },
   "devDependencies": {
     "eslint": "^6.5.1"

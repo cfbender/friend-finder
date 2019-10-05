@@ -90,7 +90,6 @@ const Survey: React.FC = () => {
         name: name.text,
         answers: getAnswers()
       };
-      console.log(data);
       try {
         const response = await fetch(url, {
           method: "POST", // or 'PUT'
@@ -110,9 +109,7 @@ const Survey: React.FC = () => {
   };
 
   const handleChange = (e: { target: { id: number; value: number } }) => {
-    console.log(name);
     formValidate();
-    console.log(name);
     const temp = answers;
     const id = e.target.id;
     temp[id] = e.target.value;

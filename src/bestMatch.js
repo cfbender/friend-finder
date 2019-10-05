@@ -9,7 +9,6 @@ module.exports = async (newFriend, data) => {
       }, 0);
     });
     const sorted = sortBy(friends, ["difference"]);
-    console.log(sorted);
     const match = sorted[0];
     resolve({ data: { photo: match.photo, name: match.name } });
   });
