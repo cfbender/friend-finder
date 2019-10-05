@@ -1,0 +1,42 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:5000",
+  "dependencies": {
+    "@reach/router": "^1.2.1",
+    "@types/jest": "24.0.18",
+    "@types/materialize-css": "^1.0.6",
+    "@types/node": "12.7.11",
+    "@types/reach__router": "^1.2.5",
+    "@types/react": "16.9.5",
+    "@types/react-dom": "16.9.1",
+    "materialize-css": "^1.0.0",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-materialize": "^3.4.1",
+    "react-scripts": "3.2.0",
+    "typescript": "3.6.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
