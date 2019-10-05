@@ -1,0 +1,15 @@
+.question-error {
+  color: red;
+}
+
+.text-error {
+  color: red;
+}
+
+.input-field {
+  min-width: 800px;
+}
+
+.input-field > label {
+  font-size: 16px;
+}
