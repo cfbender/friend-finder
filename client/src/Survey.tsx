@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Select } from "react-materialize";
+import { TextInput } from "react-materialize";
+import Question from "./Question";
 
-function Survey() {
+const Survey: React.FC = () => {
   const [answers, updateAnswers]: [
     { [k: string]: number },
     Function
@@ -17,7 +18,10 @@ function Survey() {
     nine: 0,
     ten: 0
   });
-
+  const questions: string[] = [
+    "You prefer to stay at home rather than go out and party.",
+    "You prefer cats over dogs"
+  ];
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const url = "/api";
@@ -53,20 +57,25 @@ function Survey() {
 
   return (
     <div className="container survey">
-      <h1>Survey:</h1>
+      <h2>About You</h2>
+      <TextInput placeholder="Name (Required)" />
+      <TextInput placeholder="Link to Picture of You (Required)" />
+      <h2>Survey:</h2>
+      <p>
+        Rate how much you agree with the following statements, from a 1
+        (strongly disagree) to a 5 (strongly agree)
+      </p>
       <div className="row">
         <form onSubmit={handleSubmit}>
-          <div className="input-field col s12">
-            <Select id="one" value="" onChange={handleChange}>
-              <option value="" disabled>
-                Choose your option
-              </option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </Select>
-            <label>Question One</label>
-          </div>
+          {questions.map((question, idx) => {
+            return (
+              <Question
+                key={idx}
+                text={questions[idx]}
+                callback={handleChange}
+              />
+            );
+          })}
           <input
             id="survey-submit"
             type="submit"
@@ -77,6 +86,6 @@ function Survey() {
       </div>
     </div>
   );
-}
+};
 
 export default Survey;
