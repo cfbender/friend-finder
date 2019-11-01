@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { TextInput, Modal, Button } from "react-materialize";
-import Question from "./Question";
+import { Question } from "../../components/Question";
 import "./Survey.css";
 import { navigate } from "@reach/router";
 
-const Survey: React.FC = () => {
+export const Survey: React.FC = () => {
   //hook to store answers
   const [answers, updateAnswers]: [
     { [k: string]: number },
@@ -231,5 +231,3 @@ const Survey: React.FC = () => {
     </div>
   );
 };
-
-export default Survey;

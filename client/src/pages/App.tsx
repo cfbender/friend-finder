@@ -1,11 +1,11 @@
 import React from "react";
 import { Router, RouteComponentProps, Link } from "@reach/router";
 import "./App.css";
-import Home from "./Home";
-import Survey from "./Survey";
-import NotFound from "./NotFound";
+import { Home } from "./Home";
+import { Survey } from "./Survey";
+import { NotFound } from "./NotFound";
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
   return (
     <div className="container">
       <Link to="/">
@@ -19,8 +19,6 @@ const App: React.FC = () => {
     </div>
   );
 };
-
-export default App;
 
 const RouterPage = (
   props: { pageComponent: JSX.Element } & RouteComponentProps

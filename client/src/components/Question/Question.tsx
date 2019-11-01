@@ -1,7 +1,7 @@
 import React from "react";
 import { Select } from "react-materialize";
 
-const Question: React.FC<{
+export const Question: React.FC<{
   name: string;
   text: string;
   callback: Function;
@@ -29,5 +29,3 @@ const Question: React.FC<{
     </div>
   );
 };
-
-export default Question;

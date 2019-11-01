@@ -1,9 +1,9 @@
 import React from "react";
-import { Link, navigate } from "@reach/router";
+import { Link } from "@reach/router";
 import { Button } from "react-materialize";
 import "./Home.css";
 
-const Home: React.FC = () => {
+export const Home: React.FC = () => {
   return (
     <div>
       <h2>Click below to start the survey and find a friend!</h2>
@@ -28,5 +28,3 @@ const Home: React.FC = () => {
     </div>
   );
 };
-
-export default Home;
